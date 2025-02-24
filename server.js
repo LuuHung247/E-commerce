@@ -9,5 +9,4 @@ process.on('SIGINT', () => {
     Server.close(() => {
         console.log('Server is closed');
     });
-}
-);
+});
