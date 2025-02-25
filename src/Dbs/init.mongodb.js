@@ -1,8 +1,10 @@
 "use strict";
 
 const mongoose = require("mongoose");
-
-const connectString = `mongodb://localhost:27017/dbs`;
+const {
+  db: { host, name, port },
+} = require("../Configs/config.mongodb");
+const connectString = `mongodb://${host}:${port}/${name}`;
 
 class Database {
   static instance;
@@ -19,7 +21,7 @@ class Database {
     mongoose
       .connect(connectString)
       .then(() => {
-        console.log("Database is connected, ");
+        console.log(`Database is connected to ${connectString}`);
       })
       .catch((err) => {
         console.log(err);
@@ -29,7 +31,7 @@ class Database {
   static getInstance() {
     if (!this.instance) {
       this.instance = new Database();
-      console.log("Database is connected");
+      console.log(`Database is connected to ${connectString}`);
     }
     return this.instance;
   }
