@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const KeyTokenService = require("./keyToken.service");
 const { createTokensPair } = require("../Auth/authultils");
 const { clearScreenDown } = require("readline");
+const { getInfoData } = require("../Ultils");
 
 const shopRole = {
   SHOP: "001",
@@ -39,6 +40,15 @@ class AccessService {
         // Create privateKey, publicKey
         const { privateKey, publicKey } = crypto.generateKeyPairSync("rsa", {
           modulusLength: 4096,
+          // Public key CryptoGraphy Standard 1
+          publicKeyEncoding: {
+            type: "pkcs1",
+            format: "pem",
+          },
+          privateKeyEncoding: {
+            type: "pkcs1",
+            format: "pem",
+          },
         });
         console.log({ privateKey, publicKey }); //Save to collection KeyStore
 
@@ -50,14 +60,15 @@ class AccessService {
         if (!publicKeyString) {
           return {
             code: "xxx",
-            message: "publicKey error",
+            message: "publicKeyString error",
           };
         }
 
+        const publicKeyObject = crypto.createPublicKey(publicKeyString);
         //Create token pair
         const tokens = await createTokensPair(
           { userId: newShop._id, email },
-          publicKey,
+          publicKeyString,
           privateKey
         );
 
@@ -65,11 +76,15 @@ class AccessService {
         return {
           code: 201,
           metadata: {
-            shop: newShop,
+            shop: getInfoData({
+              fileds: ["_id", "name", "email"],
+              object: newShop,
+            }),
             tokens,
           },
         };
       }
+
       return {
         code: "xxx",
         metadata: null,
