@@ -20,9 +20,7 @@ class Database {
     }
     mongoose
       .connect(connectString)
-      .then(() => {
-        console.log(`Database is connected to ${connectString}`);
-      })
+      .then(() => {})
       .catch((err) => {
         console.log(err);
       });
