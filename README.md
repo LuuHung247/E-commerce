@@ -9,3 +9,5 @@ Create
 privateKey: dung de xai token,ko dc luu, publicKey: dung de verify token , co duoc luu.
 V1: Create Key using RSA algorithm
 V2: Create Key using Random string(more simple)
+
+Middleware trong express:

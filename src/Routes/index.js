@@ -2,13 +2,12 @@
 
 const express = require("express");
 const router = express.Router();
+const { checkApiKey, checkPermission } = require("../Auth/checkAuth");
+//check apiKey
+router.use(checkApiKey);
+//check permission
+router.use(checkPermission("READ"));
 
 router.use("/v1/api", require("./access"));
-
-// router.get("", (req, res) => {
-//   return res.status(200).json({
-//     message: "Welcome to E-Com",
-//   });
-// });
 
 module.exports = router;
