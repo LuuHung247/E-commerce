@@ -9,7 +9,7 @@ const createTokensPair = async (payload, publicKey, privateKey) => {
       expiresIn: "2 days",
     });
 
-    const refressToken = JWT.sign(payload, privateKey, {
+    const refreshToken = JWT.sign(payload, privateKey, {
       // algorithm: "RS256",
       expiresIn: "7 days",
     });
@@ -23,7 +23,7 @@ const createTokensPair = async (payload, publicKey, privateKey) => {
       }
     });
 
-    return { accessToken, refressToken };
+    return { accessToken, refreshToken };
   } catch (error) {
     return error;
   }

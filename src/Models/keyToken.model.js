@@ -21,6 +21,11 @@ var keyTokenSchema = new Schema(
       required: true,
     },
     refreshToken: {
+      type: String,
+      required: true,
+    },
+    //Luu Lai refreshToken da dung
+    refreshTokensUsed: {
       type: Array,
       default: [],
     },

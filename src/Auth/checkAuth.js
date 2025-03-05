@@ -49,4 +49,9 @@ const checkPermission = (permission) => {
   };
 };
 
-module.exports = { checkApiKey, checkPermission };
+const asyncHandler = (fnc) => {
+  return (req, res, next) => {
+    fnc(req, res, next).catch(next);
+  };
+};
+module.exports = { checkApiKey, checkPermission, asyncHandler };
