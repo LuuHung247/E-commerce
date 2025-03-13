@@ -42,8 +42,18 @@ class AuthFailureError extends ErrorResponse {
   }
 }
 
+class ForbidenError extends ErrorResponse {
+  constructor(
+    message = ReasonStatusCode.FORBIDEN,
+    statusCode = StatusCode.FORBIDEN
+  ) {
+    super(message, statusCode);
+  }
+}
+
 module.exports = {
   ConflictRequestError,
   BadRequestError,
   AuthFailureError,
+  ForbidenError,
 };

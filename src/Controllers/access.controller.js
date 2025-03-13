@@ -1,7 +1,7 @@
 "use strict";
 
 const AccessService = require("../Services/access.service");
-const { OK, Created, SuccessResponse } = require("../Core/success.response");
+const { OK, Created } = require("../Core/success.response");
 class AccessController {
   //Sign Up
 
@@ -19,6 +19,21 @@ class AccessController {
       options: {
         limit: 10,
       },
+    }).send(res);
+  }
+  //Logout
+  static async logout(req, res, next) {
+    Created.create({
+      message: "Logout OK",
+      metadata: await AccessService.logout(req.keyStore),
+    }).send(res);
+  }
+
+  //Handle Refresh Token
+  static async handleRefreshToken(req, res, next) {
+    Created.create({
+      message: "Logout OK",
+      metadata: await AccessService.handleRefreshToken(req.body.refreshToken),
     }).send(res);
   }
 }

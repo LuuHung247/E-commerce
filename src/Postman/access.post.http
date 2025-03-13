@@ -1,12 +1,15 @@
 @url_dev = http://localhost:3052/v1/api/
 
-### signup
-POST {{url_dev}}shop/login
+
+POST {{url_dev}}shop/handleRefreshToken
 Content-Type: application/json
-x-api-key: 7cac5aade2221eeb04226f5ee34ac54293f8074ba8d463f4f59e9381b06fdeca585a3838e07aeaf629e5887696a731a74054062be4887e23f48bf6987c7bdc99
+x-api-key: b011c389759a8ca01e75fa8195eb07fce0933fa9da1e01c25da4d4cddbb0956b82c9881b8ae15c99578a09dd2715a69bedec8549b837bb368764f941b99be2d8
+x-client-id: 67cff8c9610b4ed66a62061f
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2NmZjhjOTYxMGI0ZWQ2NmE2MjA2MWYiLCJlbWFpbCI6InNob3BhYmMxMjNAZW1haWwuY29tIiwiaWF0IjoxNzQxNjg0ODA2LCJleHAiOjE3NDE4NTc2MDZ9.nFsZEsz-sjp1n-6WPEPgQGNuKY8TJfCVL2a5jTapSYU
 
 {
     "name": "Myshop",
-    "email": "shopabc1350@gmail.com",
-    "password": "password"
+    "email": "shopabc123@email.com",
+    "password": "lol123",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2NmZjhjOTYxMGI0ZWQ2NmE2MjA2MWYiLCJlbWFpbCI6InNob3BhYmMxMjNAZW1haWwuY29tIiwiaWF0IjoxNzQxNjg0ODA2LCJleHAiOjE3NDIyODk2MDZ9.ggz_FXUTeludStS_t01CfVN3G-4z-6Bh1jBrJy6SNfc"
 }

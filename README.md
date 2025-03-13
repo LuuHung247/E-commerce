@@ -11,3 +11,5 @@ V1: Create Key using RSA algorithm
 V2: Create Key using Random string(more simple)
 
 Middleware trong express:
+
+Trong Header, de bao mat co du: API Key, Client UserId, accessToken
