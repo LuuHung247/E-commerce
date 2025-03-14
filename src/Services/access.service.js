@@ -147,32 +147,18 @@ class AccessService {
     return delKey;
   };
   //Check token used
-  static handleRefreshToken = async (refreshToken) => {
-    const foundToken = await KeyTokenService.findByRefershTokenUsed(
-      refreshToken
-    );
-    if (foundToken) {
-      // Decode user
-      const { userId, email } = await verifyJWT(
-        refreshToken,
-        foundToken.privateKey
-      );
-      console.log(userId, email);
-      //Delete all Token
+  static handleRefreshToken = async ({ refreshToken, user, keyStore }) => {
+    const { userId, email } = user;
+    if (keyStore.refreshTokensUsed.includes(refreshToken)) {
       await KeyTokenService.removeKeyById(userId);
-      throw new ForbidenError("Some thing wrong happed !! Login Again");
+      throw new ForbidenError("Something went wrong! Please log in again.");
     }
 
-    const holderToken = await KeyTokenService.findByRefershToken(refreshToken);
-
-    if (!holderToken) throw new AuthFailureError("Shop not registered 1");
+    if (keyStore.refreshToken !== refreshToken)
+      throw new AuthFailureError("Shop not registered 1");
 
     //Verify Token
     // Decode user
-    const { userId, email } = await verifyJWT(
-      refreshToken,
-      holderToken.privateKey
-    );
 
     const foundShop = await findByEmail({ email });
     if (!foundShop) throw new AuthFailureError("Shop not registered 2");
@@ -180,22 +166,22 @@ class AccessService {
     //Create new Token Pair
     const tokens = await createTokensPair(
       { userId, email },
-      holderToken.publicKey,
-      holderToken.privateKey
+      keyStore.publicKey,
+      keyStore.privateKey
     );
 
     const oldRefreshToken = refreshToken;
-    const newRefreshToken = holderToken.refreshToken;
+    const newRefreshToken = keyStore.refreshToken;
     //update token
 
     await KeyTokenService.createNewRefreshToken(
-      holderToken._id,
+      keyStore._id,
       oldRefreshToken,
       newRefreshToken
     );
 
     return {
-      user: { userId, email },
+      user,
       tokens,
     };
   };

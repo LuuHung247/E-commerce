@@ -37,7 +37,7 @@ class KeyTokenService {
   };
 
   static removeKeyById = async (id) => {
-    return await keyTokenModel.findByIdAndDelete(new ObjectId(id)).lean();
+    return await keyTokenModel.findByIdAndDelete(new ObjectId(id));
   };
   static findByRefershTokenUsed = async (refreshToken) => {
     return await keyTokenModel

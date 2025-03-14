@@ -32,8 +32,12 @@ class AccessController {
   //Handle Refresh Token
   static async handleRefreshToken(req, res, next) {
     Created.create({
-      message: "Logout OK",
-      metadata: await AccessService.handleRefreshToken(req.body.refreshToken),
+      message: "RefreshToken OK",
+      metadata: await AccessService.handleRefreshToken({
+        refreshToken: req.refreshToken,
+        user: req.user,
+        keyStore: req.keyStore,
+      }),
     }).send(res);
   }
 }

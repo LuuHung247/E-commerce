@@ -1,7 +1,7 @@
 @url_dev = http://localhost:3052/v1/api/
 
 
-POST {{url_dev}}shop/handleRefreshToken
+POST {{url_dev}}shop/login
 Content-Type: application/json
 x-api-key: b011c389759a8ca01e75fa8195eb07fce0933fa9da1e01c25da4d4cddbb0956b82c9881b8ae15c99578a09dd2715a69bedec8549b837bb368764f941b99be2d8
 x-client-id: 67cff8c9610b4ed66a62061f

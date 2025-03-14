@@ -13,3 +13,8 @@ V2: Create Key using Random string(more simple)
 Middleware trong express:
 
 Trong Header, de bao mat co du: API Key, Client UserId, accessToken
+
+Schema Product design
+Polymorphic pattern:
+
+name, thumb, price, sold,des,quantity,type, dac dimem rieng, atribute
