@@ -8,7 +8,7 @@ const {
   clothing,
   furniture,
 } = require("../Models/product.model");
-const { getSelectData, unGetSelectData } = require("../Ultils/");
+const { getSelectData, unGetSelectData } = require("../Ultils");
 
 const findAllDraftsForShop = async ({ query, limit, skip }) => {
   return await queryProduct({ query, limit, skip });
@@ -80,6 +80,17 @@ const findProduct = async ({ product_id, unSelect }) => {
   return await product.findById(product_id).select(unGetSelectData(unSelect));
 };
 
+const updateProductById = async ({
+  productId,
+  bodyUpdate,
+  model,
+  isNew = true,
+}) => {
+  return await model.findByIdAndUpdate(productId, bodyUpdate, {
+    new: isNew,
+  });
+};
+
 module.exports = {
   findAllDraftsForShop,
   publishProductByShop,
@@ -88,4 +99,5 @@ module.exports = {
   searchProduct,
   findAllProducts,
   findProduct,
+  updateProductById,
 };

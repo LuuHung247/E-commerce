@@ -82,6 +82,21 @@ class ProductController {
       }),
     }).send(res);
   };
+
+  updateProduct = async (req, res, next) => {
+    console.log("Params received:", req.params);
+    Created.create({
+      message: "update Product success",
+      metadata: await ProductService.updateProduct(
+        req.body.product_type,
+        req.params.productId,
+        {
+          ...req.body,
+          product_shop: req.user.userId,
+        }
+      ),
+    }).send(res);
+  };
 }
 
 module.exports = new ProductController();
