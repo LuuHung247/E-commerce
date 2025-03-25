@@ -133,19 +133,22 @@ class Clothing extends Product {
     1. Remove attr has null undefined
     2.Check xem update cho nao
     */
-    const objectParams = updateNestedObjectParser(removeUndefinedObject(this));
+    const objectParams = removeUndefinedObject(this);
 
     if (objectParams.product_attributes) {
       //update child
       await updateProductById({
         productId,
-        bodyUpdate: objectParams,
+        bodyUpdate: updateNestedObjectParser(objectParams.product_attributes),
 
         model: clothing,
       });
     }
 
-    const updateProduct = await super.updateProduct(productId, objectParams);
+    const updateProduct = await super.updateProduct(
+      productId,
+      updateNestedObjectParser(objectParams)
+    );
     return updateProduct;
   }
 }
