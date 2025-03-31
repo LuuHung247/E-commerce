@@ -4,7 +4,7 @@ const apiKeyModel = require("../Models/apiKey.model");
 const crypto = require("crypto");
 
 const findById = async (key) => {
-  // createApiKey(["READ", "WRITE", "DELETE"]);
+  //createApiKey(["READ", "WRITE", "DELETE"]);
   const objKey = await apiKeyModel.findOne({ key, status: true }).lean();
   return objKey;
 };
@@ -22,4 +22,5 @@ const createApiKey = async (keyPermissions = ["READ"]) => {
 };
 module.exports = {
   findById,
+  createApiKey,
 };
